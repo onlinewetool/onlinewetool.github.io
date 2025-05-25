@@ -10,139 +10,101 @@ function getUserLanguage() {
 // 更新页面文本
 function updatePageLanguage(lang) {
     const texts = i18n[lang];
-    if (!texts) return;
+    if (!texts) {
+        console.warn(`Language ${lang} not found, falling back to default language`);
+        return;
+    }
 
     // 更新标题和描述
     document.title = texts.title;
     document.querySelector('meta[name="description"]').content = texts.description;
 
-    // 更新所有带有 data-i18n 属性的元素
-    document.querySelectorAll('[data-i18n]').forEach(element => {
+    // 初始化或更新 MutationObserver
+    initializeObserver(texts);
+
+    // 翻译现有内容
+    translateElement(document.body, texts);
+}
+
+// 初始化 MutationObserver 来处理动态内容
+function initializeObserver(texts) {
+    if (!window._i18nObserver) {
+        window._i18nObserver = new MutationObserver(mutations => {
+            mutations.forEach(mutation => {
+                mutation.addedNodes.forEach(node => {
+                    if (node.nodeType === 1) {
+                        translateElement(node, texts);
+                    }
+                });
+            });
+        });
+
+        window._i18nObserver.observe(document.body, {
+            childList: true,
+            subtree: true
+        });
+    }
+}
+
+// 翻译单个元素及其子元素
+function translateElement(element, texts) {
+    // 处理元素本身
+    if (element.getAttribute && element.hasAttribute('data-i18n')) {
         const key = element.getAttribute('data-i18n');
-        if (texts[key]) {
-            if (element.tagName.toLowerCase() === 'input' || element.tagName.toLowerCase() === 'textarea') {
-                if (element.getAttribute('placeholder')) {
-                    element.placeholder = texts[key];
-                }
-            } else {
+        const type = element.getAttribute('data-i18n-type') || 'text';
+        const attrs = element.getAttribute('data-i18n-attrs');
+        
+        if (!texts[key]) {
+            console.warn(`Translation key "${key}" not found`);
+            return;
+        }
+
+        // 处理文本内容
+        if (!element.getAttribute('data-i18n-attrs-only')) {
+            if (type === 'text') {
                 element.textContent = texts[key];
+            } else if (type === 'html') {
+                element.innerHTML = texts[key];
             }
         }
-    });
-
-    // 更新所有标签页
-    document.querySelectorAll('.nav-link').forEach(tab => {
-        const toolId = tab.getAttribute('aria-controls').replace('Tool', '');
-        if (texts[toolId]) {
-            tab.textContent = texts[toolId];
-        }
-    });
-
-    // 更新所有工具标题
-    document.querySelectorAll('.tab-pane h3').forEach(title => {
-        const toolId = title.closest('.tab-pane').id.replace('Tool', '');
-        if (texts[toolId]) {
-            title.textContent = texts[toolId];
-        }
-    });    // 更新所有标签文本和输入框placeholder
-    document.querySelectorAll('label, input[type="text"], textarea').forEach(element => {
-        if (element.tagName.toLowerCase() === 'label') {
-            if (element.htmlFor.includes('Input')) {
-                element.textContent = texts.inputText;
-            } else if (element.htmlFor.includes('Key')) {
-                element.textContent = texts.key;
-            } else if (element.htmlFor.includes('Output')) {
-                element.textContent = texts.result;
-            }
-        } else {
-            // 更新输入框和文本框的placeholder
-            if (element.id.includes('Input')) {
-                if (element.id.includes('md5')) {
-                    element.placeholder = texts.md5 + " - " + texts.inputText;
-                } else if (element.id.includes('sha256')) {
-                    element.placeholder = texts.sha256 + " - " + texts.inputText;
-                } else if (element.id.includes('sha512')) {
-                    element.placeholder = texts.sha512 + " - " + texts.inputText;
-                } else if (element.id.includes('des')) {
-                    element.placeholder = texts.des + " - " + texts.inputText;
-                } else if (element.id.includes('aes')) {
-                    element.placeholder = texts.aes + " - " + texts.inputText;
-                } else if (element.id.includes('base64')) {
-                    element.placeholder = texts.base64 + " - " + texts.inputText;
-                } else if (element.id.includes('url')) {
-                    element.placeholder = texts.url + " - " + texts.inputText;
-                }
-            } else if (element.id.includes('Key')) {
-                if (element.id.includes('des')) {
-                    element.placeholder = texts.desDesc;
-                } else if (element.id.includes('aes')) {
-                    element.placeholder = texts.aesDesc;
-                }
-            }
-        }
-    });
-
-    // 更新所有按钮文本
-    document.querySelectorAll('button').forEach(button => {
-        if (button.onclick) {
-            const funcName = button.onclick.toString();
-            if (funcName.includes('encrypt')) {
-                button.textContent = texts.encrypt;
-            } else if (funcName.includes('decrypt')) {
-                button.textContent = texts.decrypt;
-            } else if (funcName.includes('encode')) {
-                button.textContent = texts.encode;
-            } else if (funcName.includes('decode')) {
-                button.textContent = texts.decode;
-            } else if (funcName.includes('copy')) {
-                button.textContent = texts.copy;
-            }
-        }
-    });    // 更新页脚内容
-    const footer = document.querySelector('footer');
-    if (footer) {
-        // 更新"关于本站"部分
-        const aboutSection = footer.querySelector('.col-md-4:nth-child(1)');
-        if (aboutSection) {
-            aboutSection.querySelector('h5').textContent = texts.aboutSite;
-            aboutSection.querySelector('p').textContent = texts.aboutDesc;
-        }
-
-        // 更新"快速导航"部分
-        const navSection = footer.querySelector('.col-md-4:nth-child(2)');
-        if (navSection) {
-            navSection.querySelector('h5').textContent = texts.quickNav;
-            // 更新导航链接文本
-            navSection.querySelectorAll('a').forEach(link => {
-                const toolId = link.getAttribute('href').replace('#', '').replace('Tool', '');
-                if (texts[toolId]) {
-                    link.textContent = texts[toolId];
+        
+        // 处理属性
+        if (attrs) {
+            attrs.split(',').forEach(attr => {
+                const [attrName, attrKey] = attr.split(':');
+                const value = texts[attrKey || key];
+                if (value) {
+                    element.setAttribute(attrName, value);
                 }
             });
         }
+    }
 
-        // 更新"联系我们"部分
-        const contactSection = footer.querySelector('.col-md-4:nth-child(3)');
-        if (contactSection) {
-            contactSection.querySelector('h5').textContent = texts.contact;
-            const paragraphs = contactSection.querySelectorAll('p');
-            if (paragraphs.length >= 1) {
-                paragraphs[0].textContent = texts.feedback;
-            }
+    // 处理占位符
+    if (element.getAttribute && element.hasAttribute('data-i18n-placeholder')) {
+        const keys = element.getAttribute('data-i18n-placeholder').split(',');
+        if (keys.length === 1) {
+            element.placeholder = texts[keys[0]] || '';
+        } else if (keys.length === 2) {
+            element.placeholder = `${texts[keys[0]]} - ${texts[keys[1]]}`;
         }
+    }
 
-        // 更新版权信息
-        const copyright = footer.querySelector('.text-center p');
-        if (copyright) {
-            copyright.textContent = texts.copyright;
-        }
+    // 递归处理子元素
+    if (element.querySelectorAll) {
+        element.querySelectorAll('[data-i18n], [data-i18n-placeholder]').forEach(el => 
+            translateElement(el, texts)
+        );
     }
 }
 
 // 初始化语言设置
 function initLanguage() {
     const userLang = getUserLanguage();
-    document.getElementById('langSelect').value = userLang;
+    const langSelect = document.getElementById('langSelect');
+    if (langSelect) {
+        langSelect.value = userLang;
+    }
     updatePageLanguage(userLang);
 }
 

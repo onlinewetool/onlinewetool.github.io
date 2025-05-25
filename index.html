@@ -7,16 +7,15 @@
     <!-- 资源预加载 -->
     <link rel="preload" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" as="style">
     <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.9-1/crypto-js.js" as="script">
-    
-    <!-- SEO Meta 标签 -->
-    <title>在线加密解密工具 - MD5/SHA/AES/DES/Base64/URL编码解码工具箱</title>
-    <meta name="description" content="免费在线加密解密工具箱，支持MD5加密，SHA256/SHA512哈希计算，AES加解密，DES加解密，Base64编码解码，URL编码解码。无需下载，即开即用。">
-    <meta name="keywords" content="在线加密,在线解密,MD5加密,SHA256,SHA512,AES加密,DES加密,Base64编码,URL编码,在线工具,加密工具,解密工具">
+      <!-- SEO Meta 标签 -->
+    <title data-i18n="metaTitle">在线加密解密工具 - MD5/SHA/AES/DES/Base64/URL编码解码工具箱</title>
+    <meta name="description" data-i18n-attrs="content:metaDesc" content="免费在线加密解密工具箱，支持MD5加密，SHA256/SHA512哈希计算，AES加解密，DES加解密，Base64编码解码，URL编码解码。无需下载，即开即用。">
+    <meta name="keywords" data-i18n-attrs="content:metaKeywords" content="在线加密,在线解密,MD5加密,SHA256,SHA512,AES加密,DES加密,Base64编码,URL编码,在线工具,加密工具,解密工具">
     <meta name="author" content="Online Crypto Tools">
     <meta name="robots" content="index, follow">
       <!-- Open Graph Meta 标签，优化社交分享效果 -->
-    <meta property="og:title" content="在线加密解密工具 - 免费在线加密工具箱">
-    <meta property="og:description" content="一站式在线加密解密工具，支持多种加密算法，包括MD5/SHA/AES/DES等，使用便捷，无需下载。">
+    <meta property="og:title" data-i18n-attrs="content:ogTitle" content="在线加密解密工具 - 免费在线加密工具箱">
+    <meta property="og:description" data-i18n-attrs="content:ogDesc" content="一站式在线加密解密工具，支持多种加密算法，包括MD5/SHA/AES/DES等，使用便捷，无需下载。">
     <meta property="og:type" content="website">    
     <meta property="og:url" content="https://onlinewetool.github.io/">
     
@@ -113,16 +112,18 @@
         }
     </style>
 </head>
-<body>    <div class="container mt-5">
+<body>    
+    <div class="container mt-5">
         <div class="d-flex justify-content-between align-items-center mb-4">
-            <h1 class="i18n" data-i18n="title">在线加密解密工具</h1>
+            <h1 data-i18n="title">在线加密解密工具</h1>
             <div>
                 <select id="langSelect" class="form-control form-control-sm d-inline-block mr-2" style="width: auto;">
                     <option value="zh-CN">中文</option>
                     <option value="en">English</option>
                 </select>
                 <button class="btn btn-info" type="button" data-toggle="collapse" data-target="#helpContent" aria-expanded="false" aria-controls="helpContent">
-                    <i class="fas fa-question-circle"></i> <span class="i18n" data-i18n="viewGuide">查看使用说明</span>
+                    <i class="fas fa-question-circle"></i> 
+                    <span data-i18n="viewGuide">查看使用说明</span>
                 </button>
             </div>
         </div>
@@ -130,45 +131,24 @@
         <!-- 可折叠的说明内容 -->
         <div class="collapse mb-4" id="helpContent">
             <div class="card card-body">
-                <h4 class="card-title i18n" data-i18n="about">关于本工具</h4>
-                <p class="lead i18n" data-i18n="description">免费、安全、便捷的在线加密解密工具箱，支持多种加密算法。所有运算都在您的浏览器中完成，不会将数据传输到服务器。</p>
+                <h4 class="card-title" data-i18n="about">关于本工具</h4>
+                <p class="lead" data-i18n="description">免费、安全、便捷的在线加密解密工具箱，支持多种加密算法。所有运算都在您的浏览器中完成，不会将数据传输到服务器。</p>
                 
-                <h5 class="mt-4 i18n" data-i18n="toolGuide">工具说明：</h5>
+                <h5 class="mt-4" data-i18n="toolGuide">工具说明</h5>
                 <div class="row">
                     <div class="col-md-6">
-                        <ul class="list-group list-group-flush">
-                            <li class="list-group-item">
-                                <h6 class="mb-1 i18n" data-i18n="md5">MD5</h6>
-                                <small class="text-muted i18n" data-i18n="md5Desc">不可逆的哈希算法，常用于密码存储、文件校验</small>
-                            </li>
-                            <li class="list-group-item">
-                                <h6 class="mb-1 i18n" data-i18n="sha256">SHA256</h6>
-                                <small class="text-muted i18n" data-i18n="sha256Desc">安全性更高的哈希算法，输出长度为64位</small>
-                            </li>
-                            <li class="list-group-item">
-                                <h6 class="mb-1 i18n" data-i18n="sha512">SHA512</h6>
-                                <small class="text-muted i18n" data-i18n="sha512Desc">安全性更高的哈希算法，输出长度为128位</small>
-                            </li>
-                            <li class="list-group-item">
-                                <h6 class="mb-1 i18n" data-i18n="des">DES</h6>
-                                <small class="text-muted i18n" data-i18n="desDesc">对称加密算法，需要8位字符密钥</small>
-                            </li>
+                        <ul class="list-unstyled">
+                            <li><strong data-i18n="md5">MD5加密</strong> - <span data-i18n="md5Desc"></span></li>
+                            <li><strong data-i18n="sha256">SHA256加密</strong> - <span data-i18n="sha256Desc"></span></li>
+                            <li><strong data-i18n="sha512">SHA512加密</strong> - <span data-i18n="sha512Desc"></span></li>
                         </ul>
                     </div>
                     <div class="col-md-6">
-                        <ul class="list-group list-group-flush">
-                            <li class="list-group-item">
-                                <h6 class="mb-1 i18n" data-i18n="aes">AES</h6>
-                                <small class="text-muted i18n" data-i18n="aesDesc">高级加密标准，支持16/24/32位字符密钥</small>
-                            </li>
-                            <li class="list-group-item">
-                                <h6 class="mb-1 i18n" data-i18n="base64">Base64</h6>
-                                <small class="text-muted i18n" data-i18n="base64Desc">基础的编码方式，用于传输二进制数据</small>
-                            </li>
-                            <li class="list-group-item">
-                                <h6 class="mb-1 i18n" data-i18n="url">URL</h6>
-                                <small class="text-muted i18n" data-i18n="urlDesc">网址编码，用于处理URL中的特殊字符</small>
-                            </li>
+                        <ul class="list-unstyled">
+                            <li><strong data-i18n="des">DES加解密</strong> - <span data-i18n="desDesc"></span></li>
+                            <li><strong data-i18n="aes">AES加解密</strong> - <span data-i18n="aesDesc"></span></li>
+                            <li><strong data-i18n="base64">Base64编码/解码</strong> - <span data-i18n="base64Desc"></span></li>
+                            <li><strong data-i18n="url">URL编码/解码</strong> - <span data-i18n="urlDesc"></span></li>
                         </ul>
                     </div>
                 </div>
@@ -178,190 +158,176 @@
         <!-- 标签页导航 -->
         <ul class="nav nav-tabs" id="cryptoTabs" role="tablist">
             <li class="nav-item">
-                <a class="nav-link active" id="md5-tab" data-toggle="tab" href="#md5Tool" role="tab" aria-controls="md5Tool" aria-selected="true">MD5加密</a>
+                <a class="nav-link active" id="md5-tab" data-toggle="tab" href="#md5Tool" role="tab" data-i18n="md5">MD5加密</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" id="sha256-tab" data-toggle="tab" href="#sha256Tool" role="tab" aria-controls="sha256Tool" aria-selected="false">SHA256加密</a>
+                <a class="nav-link" id="sha256-tab" data-toggle="tab" href="#sha256Tool" role="tab" data-i18n="sha256">SHA256加密</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" id="sha512-tab" data-toggle="tab" href="#sha512Tool" role="tab" aria-controls="sha512Tool" aria-selected="false">SHA512加密</a>
+                <a class="nav-link" id="sha512-tab" data-toggle="tab" href="#sha512Tool" role="tab" data-i18n="sha512">SHA512加密</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" id="des-tab" data-toggle="tab" href="#desTool" role="tab" aria-controls="desTool" aria-selected="false">DES加解密</a>
+                <a class="nav-link" id="des-tab" data-toggle="tab" href="#desTool" role="tab" data-i18n="des">DES加解密</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" id="aes-tab" data-toggle="tab" href="#aesTool" role="tab" aria-controls="aesTool" aria-selected="false">AES加解密</a>
+                <a class="nav-link" id="aes-tab" data-toggle="tab" href="#aesTool" role="tab" data-i18n="aes">AES加解密</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" id="base64-tab" data-toggle="tab" href="#base64Tool" role="tab" aria-controls="base64Tool" aria-selected="false">Base64编码</a>
+                <a class="nav-link" id="base64-tab" data-toggle="tab" href="#base64Tool" role="tab" data-i18n="base64">Base64编码/解码</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" id="url-tab" data-toggle="tab" href="#urlTool" role="tab" aria-controls="urlTool" aria-selected="false">URL编码</a>
+                <a class="nav-link" id="url-tab" data-toggle="tab" href="#urlTool" role="tab" data-i18n="url">URL编码/解码</a>
             </li>
         </ul>
 
         <!-- 标签页内容 -->
         <div class="tab-content" id="cryptoTabContent">
             <!-- MD5工具 -->
-            <div class="tab-pane fade show active" id="md5Tool" role="tabpanel" aria-labelledby="md5-tab">
-                <h3>MD5加密</h3>
+            <div class="tab-pane fade show active" id="md5Tool" role="tabpanel">
+                <h3 data-i18n="md5">MD5加密</h3>
                 <div class="form-group">
-                    <label for="md5Input">输入文本:</label>
-                    <input type="text" id="md5Input" class="form-control" placeholder="输入需要加密的文本">
+                    <label for="md5Input" data-i18n="inputText">输入文本:</label>
+                    <input type="text" id="md5Input" class="form-control" data-i18n-attrs="placeholder:inputPlaceholder">
                 </div>
-                <button class="btn btn-primary" onclick="encryptMD5()">加密</button>
+                <button class="btn btn-primary" onclick="encryptMD5()" data-i18n="encrypt">加密</button>
                 <div class="form-group mt-3">
-                    <label for="md5Output">加密结果:</label>
+                    <label for="md5Output" data-i18n="result">加密结果:</label>
                     <div class="input-group">
                         <input type="text" id="md5Output" class="form-control" readonly>
                         <div class="input-group-append">
-                            <button class="btn btn-outline-secondary" type="button" onclick="copyToClipboard('md5Output')">
-                                复制结果
-                            </button>
+                            <button class="btn btn-outline-secondary" onclick="copyToClipboard('md5Output')" data-i18n="copy">复制结果</button>
                         </div>
                     </div>
                 </div>
-            </div>
-
-            <!-- SHA256工具 -->
-            <div class="tab-pane fade" id="sha256Tool" role="tabpanel" aria-labelledby="sha256-tab">
-                <h3>SHA256加密</h3>
+            </div>            <!-- SHA256工具 -->
+            <div class="tab-pane fade" id="sha256Tool" role="tabpanel">
+                <h3 class="i18n" data-i18n="sha256">SHA256加密</h3>
                 <div class="form-group">
-                    <label for="sha256Input">输入文本:</label>
-                    <textarea id="sha256Input" class="form-control" rows="3" placeholder="输入需要加密的文本"></textarea>
+                    <label for="sha256Input" class="i18n" data-i18n="inputText">输入文本:</label>
+                    <textarea id="sha256Input" class="form-control" rows="3" data-i18n-placeholder="inputPlaceholder"></textarea>
                 </div>
-                <button class="btn btn-primary" onclick="encryptSHA256()">加密</button>
+                <button class="btn btn-primary i18n" onclick="encryptSHA256()" data-i18n="encrypt">加密</button>
                 <div class="form-group mt-3">
-                    <label for="sha256Output">加密结果:</label>
+                    <label for="sha256Output" class="i18n" data-i18n="result">加密结果:</label>
                     <div class="input-group">
                         <textarea id="sha256Output" class="form-control" rows="3" readonly></textarea>
                         <div class="input-group-append">
-                            <button class="btn btn-outline-secondary" type="button" onclick="copyToClipboard('sha256Output')">
+                            <button class="btn btn-outline-secondary i18n" type="button" onclick="copyToClipboard('sha256Output')" data-i18n="copy">
                                 复制结果
                             </button>
                         </div>
                     </div>
                 </div>
-            </div>
-
-            <!-- SHA512工具 -->
-            <div class="tab-pane fade" id="sha512Tool" role="tabpanel" aria-labelledby="sha512-tab">
-                <h3>SHA512加密</h3>
+            </div>            <!-- SHA512工具 -->
+            <div class="tab-pane fade" id="sha512Tool" role="tabpanel">
+                <h3 class="i18n" data-i18n="sha512">SHA512加密</h3>
                 <div class="form-group">
-                    <label for="sha512Input">输入文本:</label>
-                    <textarea id="sha512Input" class="form-control" rows="3" placeholder="输入需要加密的文本"></textarea>
+                    <label for="sha512Input" class="i18n" data-i18n="inputText">输入文本:</label>
+                    <textarea id="sha512Input" class="form-control" rows="3" data-i18n-placeholder="inputPlaceholder"></textarea>
                 </div>
-                <button class="btn btn-primary" onclick="encryptSHA512()">加密</button>
+                <button class="btn btn-primary i18n" onclick="encryptSHA512()" data-i18n="encrypt">加密</button>
                 <div class="form-group mt-3">
-                    <label for="sha512Output">加密结果:</label>
+                    <label for="sha512Output" class="i18n" data-i18n="result">加密结果:</label>
                     <div class="input-group">
                         <textarea id="sha512Output" class="form-control" rows="3" readonly></textarea>
                         <div class="input-group-append">
-                            <button class="btn btn-outline-secondary" type="button" onclick="copyToClipboard('sha512Output')">
+                            <button class="btn btn-outline-secondary i18n" type="button" onclick="copyToClipboard('sha512Output')" data-i18n="copy">
                                 复制结果
                             </button>
                         </div>
                     </div>
                 </div>
-            </div>
-
-            <!-- DES工具 -->
-            <div class="tab-pane fade" id="desTool" role="tabpanel" aria-labelledby="des-tab">
-                <h3>DES加解密</h3>
+            </div>            <!-- DES工具 -->
+            <div class="tab-pane fade" id="desTool" role="tabpanel">
+                <h3 class="i18n" data-i18n="des">DES加解密</h3>
                 <div class="form-group">
-                    <label for="desInput">输入文本:</label>
-                    <textarea id="desInput" class="form-control" rows="3" placeholder="输入需要加密/解密的文本"></textarea>
+                    <label for="desInput" class="i18n" data-i18n="inputText">输入文本:</label>
+                    <textarea id="desInput" class="form-control" rows="3" data-i18n-placeholder="desInputPlaceholder"></textarea>
                 </div>
                 <div class="form-group">
-                    <label for="desKey">密钥:</label>
-                    <input type="text" id="desKey" class="form-control" placeholder="输入8位字符的密钥">
+                    <label for="desKey" class="i18n" data-i18n="key">密钥:</label>
+                    <input type="text" id="desKey" class="form-control" data-i18n-placeholder="desKeyPlaceholder">
                 </div>
                 <div class="btn-group">
-                    <button class="btn btn-primary mr-2" onclick="encryptDES()">加密</button>
-                    <button class="btn btn-secondary" onclick="decryptDES()">解密</button>
+                    <button class="btn btn-primary mr-2 i18n" onclick="encryptDES()" data-i18n="encrypt">加密</button>
+                    <button class="btn btn-secondary i18n" onclick="decryptDES()" data-i18n="decrypt">解密</button>
                 </div>
                 <div class="form-group mt-3">
-                    <label for="desOutput">结果:</label>
+                    <label for="desOutput" class="i18n" data-i18n="result">结果:</label>
                     <div class="input-group">
                         <textarea id="desOutput" class="form-control" rows="3" readonly></textarea>
                         <div class="input-group-append">
-                            <button class="btn btn-outline-secondary" type="button" onclick="copyToClipboard('desOutput')">
+                            <button class="btn btn-outline-secondary i18n" type="button" onclick="copyToClipboard('desOutput')" data-i18n="copy">
                                 复制结果
                             </button>
                         </div>
                     </div>
                 </div>
-            </div>
-
-            <!-- AES工具 -->
-            <div class="tab-pane fade" id="aesTool" role="tabpanel" aria-labelledby="aes-tab">
-                <h3>AES加解密</h3>
+            </div>            <!-- AES工具 -->
+            <div class="tab-pane fade" id="aesTool" role="tabpanel">
+                <h3 data-i18n="aes">AES加解密</h3>
                 <div class="form-group">
-                    <label for="aesInput">输入文本:</label>
-                    <textarea id="aesInput" class="form-control" rows="3" placeholder="输入需要加密/解密的文本"></textarea>
+                    <label for="aesInput" data-i18n="inputText">输入文本:</label>
+                    <textarea id="aesInput" class="form-control" rows="3" data-i18n-attrs="placeholder:desInputPlaceholder"></textarea>
                 </div>
                 <div class="form-group">
-                    <label for="aesKey">密钥:</label>
-                    <input type="text" id="aesKey" class="form-control" placeholder="输入16/24/32位字符的密钥">
+                    <label for="aesKey" data-i18n="key">密钥:</label>
+                    <input type="text" id="aesKey" class="form-control" data-i18n-attrs="placeholder:aesKeyPlaceholder">
                 </div>
                 <div class="btn-group">
-                    <button class="btn btn-primary mr-2" onclick="encryptAES()">加密</button>
-                    <button class="btn btn-secondary" onclick="decryptAES()">解密</button>
+                    <button class="btn btn-primary mr-2" onclick="encryptAES()" data-i18n="encrypt">加密</button>
+                    <button class="btn btn-secondary" onclick="decryptAES()" data-i18n="decrypt">解密</button>
                 </div>
                 <div class="form-group mt-3">
-                    <label for="aesOutput">结果:</label>
+                    <label for="aesOutput" data-i18n="result">结果:</label>
                     <div class="input-group">
                         <textarea id="aesOutput" class="form-control" rows="3" readonly></textarea>
                         <div class="input-group-append">
-                            <button class="btn btn-outline-secondary" type="button" onclick="copyToClipboard('aesOutput')">
+                            <button class="btn btn-outline-secondary" type="button" onclick="copyToClipboard('aesOutput')" data-i18n="copy">
                                 复制结果
                             </button>
                         </div>
                     </div>
                 </div>
-            </div>
-
-            <!-- Base64工具 -->
-            <div class="tab-pane fade" id="base64Tool" role="tabpanel" aria-labelledby="base64-tab">
-                <h3>Base64编码/解码</h3>
+            </div>            <!-- Base64工具 -->
+            <div class="tab-pane fade" id="base64Tool" role="tabpanel">
+                <h3 data-i18n="base64">Base64编码/解码</h3>
                 <div class="form-group">
-                    <label for="base64Input">输入文本:</label>
-                    <textarea id="base64Input" class="form-control" rows="3" placeholder="输入需要编码/解码的文本"></textarea>
+                    <label for="base64Input" data-i18n="inputText">输入文本:</label>
+                    <textarea id="base64Input" class="form-control" rows="3" data-i18n-attrs="placeholder:desInputPlaceholder"></textarea>
                 </div>
                 <div class="btn-group">
-                    <button class="btn btn-primary mr-2" onclick="encodeBase64()">编码</button>
-                    <button class="btn btn-secondary" onclick="decodeBase64()">解码</button>
+                    <button class="btn btn-primary mr-2" onclick="encodeBase64()" data-i18n="encode">编码</button>
+                    <button class="btn btn-secondary" onclick="decodeBase64()" data-i18n="decode">解码</button>
                 </div>
                 <div class="form-group mt-3">
-                    <label for="base64Output">结果:</label>
+                    <label for="base64Output" data-i18n="result">结果:</label>
                     <div class="input-group">
                         <textarea id="base64Output" class="form-control" rows="3" readonly></textarea>
                         <div class="input-group-append">
-                            <button class="btn btn-outline-secondary" type="button" onclick="copyToClipboard('base64Output')">
+                            <button class="btn btn-outline-secondary" type="button" onclick="copyToClipboard('base64Output')" data-i18n="copy">
                                 复制结果
                             </button>
                         </div>
                     </div>
                 </div>
-            </div>
-
-            <!-- URL编码工具 -->
-            <div class="tab-pane fade" id="urlTool" role="tabpanel" aria-labelledby="url-tab">
-                <h3>URL编码/解码</h3>
+            </div>            <!-- URL编码工具 -->
+            <div class="tab-pane fade" id="urlTool" role="tabpanel">
+                <h3 data-i18n="url">URL编码/解码</h3>
                 <div class="form-group">
-                    <label for="urlInput">输入文本:</label>
-                    <textarea id="urlInput" class="form-control" rows="3" placeholder="输入需要编码/解码的文本"></textarea>
+                    <label for="urlInput" data-i18n="inputText">输入文本:</label>
+                    <textarea id="urlInput" class="form-control" rows="3" data-i18n-attrs="placeholder:desInputPlaceholder"></textarea>
                 </div>
                 <div class="btn-group">
-                    <button class="btn btn-primary mr-2" onclick="encodeURL()">编码</button>
-                    <button class="btn btn-secondary" onclick="decodeURL()">解码</button>
+                    <button class="btn btn-primary mr-2" onclick="encodeURL()" data-i18n="encode">编码</button>
+                    <button class="btn btn-secondary" onclick="decodeURL()" data-i18n="decode">解码</button>
                 </div>
                 <div class="form-group mt-3">
-                    <label for="urlOutput">结果:</label>
+                    <label for="urlOutput" data-i18n="result">结果:</label>
                     <div class="input-group">
                         <textarea id="urlOutput" class="form-control" rows="3" readonly></textarea>
                         <div class="input-group-append">
-                            <button class="btn btn-outline-secondary" type="button" onclick="copyToClipboard('urlOutput')">
+                            <button class="btn btn-outline-secondary" type="button" onclick="copyToClipboard('urlOutput')" data-i18n="copy">
                                 复制结果
                             </button>
                         </div>
@@ -376,30 +342,34 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-4">
-                    <h5>关于本站</h5>
-                    <p>本站提供免费的在线加密解密工具，所有运算均在本地完成，保证数据安全。</p>
+                    <h5 data-i18n="aboutSite">关于本站</h5>
+                    <p data-i18n="aboutDesc">本站提供免费的在线加密解密工具，所有运算均在本地完成，保证数据安全。</p>
                 </div>
                 <div class="col-md-4">
-                    <h5>快速导航</h5>
+                    <h5 data-i18n="quickNav">快速导航</h5>
                     <ul class="list-unstyled">
-                        <li><a href="#md5Tool">MD5加密</a></li>
-                        <li><a href="#sha256Tool">SHA256加密</a></li>
-                        <li><a href="#sha512Tool">SHA512加密</a></li>
-                        <li><a href="#desTool">DES加解密</a></li>
+                        <li><a href="#md5Tool" data-i18n="md5">MD5加密</a></li>
+                        <li><a href="#sha256Tool" data-i18n="sha256">SHA256加密</a></li>
+                        <li><a href="#sha512Tool" data-i18n="sha512">SHA512加密</a></li>
+                        <li><a href="#desTool" data-i18n="des">DES加解密</a></li>
+                        <li><a href="#aesTool" data-i18n="aes">AES加解密</a></li>
+                        <li><a href="#base64Tool" data-i18n="base64">Base64编码/解码</a></li>
+                        <li><a href="#urlTool" data-i18n="url">URL编码/解码</a></li>
                     </ul>
                 </div>
                 <div class="col-md-4">
-                    <h5>联系我们</h5>
-                    <p>如有问题或建议，欢迎给我们反馈。</p>
-                    <p>Email: gary.zhu1991@qq.com</p>
+                    <h5 data-i18n="contact">联系我们</h5>
+                    <p data-i18n="feedback">如有问题或建议，欢迎给我们反馈。</p>
                 </div>
             </div>
             <hr class="mt-4">
             <div class="text-center">
-                <p class="mb-0">&copy; 2025 Online Crypto Tools. All rights reserved.</p>
+                <p data-i18n="copyright">© 2025 Online Crypto Tools. All rights reserved.</p>
             </div>
         </div>
-    </footer>    <!-- 引入 Bootstrap 相关的 JS -->
+    </footer>
+    
+    <!-- 引入 Bootstrap 相关的 JS -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" defer></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" defer></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" defer></script>
@@ -477,16 +447,14 @@
             if (tooltip) {
                 tooltip.remove();
             }
-        }
-
-        // MD5加密
+        }        // MD5加密
         function encryptMD5() {
             var input = document.getElementById('md5Input');
             try {
                 var encrypted = CryptoJS.MD5(input.value);
                 document.getElementById('md5Output').value = encrypted;
             } catch (e) {
-                showError(input, '加密失败：' + e.message);
+                showError(input, i18n[getUserLanguage()].encryptFailed + e.message);
             }
         }
 
@@ -497,7 +465,7 @@
                 var encrypted = CryptoJS.SHA256(input.value);
                 document.getElementById('sha256Output').value = encrypted;
             } catch (e) {
-                showError(input, '加密失败：' + e.message);
+                showError(input, i18n[getUserLanguage()].encryptFailed + e.message);
             }
         }
 
@@ -508,7 +476,7 @@
                 var encrypted = CryptoJS.SHA512(input.value);
                 document.getElementById('sha512Output').value = encrypted;
             } catch (e) {
-                showError(input, '加密失败：' + e.message);
+                showError(input, i18n[getUserLanguage()].encryptFailed + e.message);
             }
         }
 
@@ -520,7 +488,7 @@
                 var encrypted = CryptoJS.DES.encrypt(input.value, key.value).toString();
                 document.getElementById('desOutput').value = encrypted;
             } catch (e) {
-                showError(key, '加密失败：' + e.message);
+                showError(key, i18n[getUserLanguage()].encryptFailed + e.message);
             }
         }
 
@@ -533,7 +501,7 @@
                 var result = decrypted.toString(CryptoJS.enc.Utf8);
                 document.getElementById('desOutput').value = result;
             } catch (e) {
-                showError(key, '解密失败：' + e.message);
+                showError(key, i18n[getUserLanguage()].decryptFailed + e.message);
             }
         }
 
@@ -545,7 +513,7 @@
                 var encrypted = CryptoJS.AES.encrypt(input.value, key.value).toString();
                 document.getElementById('aesOutput').value = encrypted;
             } catch (e) {
-                showError(key, '加密失败：' + e.message);
+                showError(key, i18n[getUserLanguage()].encryptFailed + e.message);
             }
         }
 
@@ -558,7 +526,7 @@
                 var result = decrypted.toString(CryptoJS.enc.Utf8);
                 document.getElementById('aesOutput').value = result;
             } catch (e) {
-                showError(key, '解密失败：' + e.message);
+                showError(key, i18n[getUserLanguage()].decryptFailed + e.message);
             }
         }
 
@@ -569,7 +537,7 @@
                 var encoded = btoa(unescape(encodeURIComponent(input.value)));
                 document.getElementById('base64Output').value = encoded;
             } catch (e) {
-                showError(input, '编码失败：' + e.message);
+                showError(input, i18n[getUserLanguage()].encodeFailed + e.message);
             }
         }
 
@@ -580,7 +548,7 @@
                 var decoded = decodeURIComponent(escape(atob(input.value)));
                 document.getElementById('base64Output').value = decoded;
             } catch (e) {
-                showError(input, '解码失败：' + e.message);
+                showError(input, i18n[getUserLanguage()].decodeFailed + e.message);
             }
         }
 
@@ -591,7 +559,7 @@
                 var encoded = encodeURIComponent(input.value);
                 document.getElementById('urlOutput').value = encoded;
             } catch (e) {
-                showError(input, '编码失败：' + e.message);
+                showError(input, i18n[getUserLanguage()].encodeFailed + e.message);
             }
         }
 
@@ -602,7 +570,7 @@
                 var decoded = decodeURIComponent(input.value);
                 document.getElementById('urlOutput').value = decoded;
             } catch (e) {
-                showError(input, '解码失败：' + e.message);
+                showError(input, i18n[getUserLanguage()].decodeFailed + e.message);
             }
         }
     </script>
