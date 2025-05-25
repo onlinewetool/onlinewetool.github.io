@@ -4,6 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
+    <!-- 资源预加载 -->
+    <link rel="preload" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" as="style">
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.9-1/crypto-js.js" as="script">
+    
     <!-- SEO Meta 标签 -->
     <title>在线加密解密工具 - MD5/SHA/AES/DES/Base64/URL编码解码工具箱</title>
     <meta name="description" content="免费在线加密解密工具箱，支持MD5加密，SHA256/SHA512哈希计算，AES加解密，DES加解密，Base64编码解码，URL编码解码。无需下载，即开即用。">
@@ -22,6 +26,31 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
       <!-- 规范链接 -->
     <link rel="canonical" href="https://wetool.dpdns.org/">
+    
+    <!-- 结构化数据 -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "在线加密解密工具",
+      "description": "免费在线加密解密工具箱，支持MD5加密，SHA256/SHA512哈希计算，AES加解密，DES加解密，Base64编码解码，URL编码解码。无需下载，即开即用。",
+      "applicationCategory": "SecurityApplication",
+      "operatingSystem": "Web Browser",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
+      "featureList": [
+        "MD5加密",
+        "SHA256/SHA512加密",
+        "DES加解密",
+        "AES加解密",
+        "Base64编码解码",
+        "URL编码解码"
+      ]
+    }
+    </script>
     
     <!-- 引入Bootstrap -->
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
@@ -329,12 +358,10 @@
                 <p class="mb-0">&copy; 2025 Online Crypto Tools. All rights reserved.</p>
             </div>
         </div>
-    </footer>
-
-    <!-- 引入 Bootstrap 相关的 JS -->
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    </footer>    <!-- 引入 Bootstrap 相关的 JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" defer></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" defer></script>
     
     <script>
         // 复制到剪贴板

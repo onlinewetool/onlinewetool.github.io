@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+Sitemap: https://wetool.dpdns.org/sitemap.xml
+
+# Prevent caching of certain files
+User-agent: *
+Disallow: /*.js$
+Disallow: /*.css$
