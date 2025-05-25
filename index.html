@@ -3,7 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>在线加密解密工具</title>
+    
+    <!-- SEO Meta 标签 -->
+    <title>在线加密解密工具 - MD5/SHA/AES/DES/Base64/URL编码解码工具箱</title>
+    <meta name="description" content="免费在线加密解密工具箱，支持MD5加密，SHA256/SHA512哈希计算，AES加解密，DES加解密，Base64编码解码，URL编码解码。无需下载，即开即用。">
+    <meta name="keywords" content="在线加密,在线解密,MD5加密,SHA256,SHA512,AES加密,DES加密,Base64编码,URL编码,在线工具,加密工具,解密工具">
+    <meta name="author" content="Online Crypto Tools">
+    <meta name="robots" content="index, follow">
+      <!-- Open Graph Meta 标签，优化社交分享效果 -->
+    <meta property="og:title" content="在线加密解密工具 - 免费在线加密工具箱">
+    <meta property="og:description" content="一站式在线加密解密工具，支持多种加密算法，包括MD5/SHA/AES/DES等，使用便捷，无需下载。">
+    <meta property="og:type" content="website">    
+    <meta property="og:url" content="https://onlinewetool.github.io/">
+    
+    <!-- 移动设备优化 -->
+    <meta name="theme-color" content="#ffffff">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+      <!-- 规范链接 -->
+    <link rel="canonical" href="https://wetool.dpdns.org/">
+    
     <!-- 引入Bootstrap -->
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <!-- 引入加密库 -->
@@ -65,7 +84,26 @@
 </head>
 <body>
     <div class="container mt-5">
-        <h1 class="text-center mb-4">在线加密解密工具</h1>
+        <div class="jumbotron">
+            <h1 class="text-center">在线加密解密工具</h1>
+            <p class="lead text-center mt-3">
+                免费、安全、便捷的在线加密解密工具箱，支持多种加密算法。所有运算都在您的浏览器中完成，不会将数据传输到服务器。
+            </p>
+        </div>
+
+        <!-- 工具说明 -->
+        <div class="alert alert-info mb-4" role="alert">
+            <h4 class="alert-heading mb-3">使用说明</h4>
+            <p>选择您需要的加密/解密方式，输入文本后点击相应按钮即可。每个工具的具体说明如下：</p>
+            <ul class="mb-0">
+                <li><strong>MD5：</strong>不可逆的哈希算法，常用于密码存储、文件校验</li>
+                <li><strong>SHA256/SHA512：</strong>安全性更高的哈希算法，输出长度分别为64位和128位</li>
+                <li><strong>DES：</strong>对称加密算法，需要8位字符密钥</li>
+                <li><strong>AES：</strong>高级加密标准，支持16/24/32位字符密钥</li>
+                <li><strong>Base64：</strong>基础的编码方式，用于传输二进制数据</li>
+                <li><strong>URL：</strong>网址编码，用于处理URL中的特殊字符</li>
+            </ul>
+        </div>
         
         <!-- 标签页导航 -->
         <ul class="nav nav-tabs" id="cryptoTabs" role="tablist">
@@ -104,7 +142,14 @@
                 <button class="btn btn-primary" onclick="encryptMD5()">加密</button>
                 <div class="form-group mt-3">
                     <label for="md5Output">加密结果:</label>
-                    <input type="text" id="md5Output" class="form-control" readonly>
+                    <div class="input-group">
+                        <input type="text" id="md5Output" class="form-control" readonly>
+                        <div class="input-group-append">
+                            <button class="btn btn-outline-secondary" type="button" onclick="copyToClipboard('md5Output')">
+                                复制结果
+                            </button>
+                        </div>
+                    </div>
                 </div>
             </div>
 
@@ -116,8 +161,16 @@
                     <textarea id="sha256Input" class="form-control" rows="3" placeholder="输入需要加密的文本"></textarea>
                 </div>
                 <button class="btn btn-primary" onclick="encryptSHA256()">加密</button>
-                <div class="form-group mt-3">                    <label for="sha256Output">加密结果:</label>
-                    <textarea id="sha256Output" class="form-control" rows="3" readonly></textarea>
+                <div class="form-group mt-3">
+                    <label for="sha256Output">加密结果:</label>
+                    <div class="input-group">
+                        <textarea id="sha256Output" class="form-control" rows="3" readonly></textarea>
+                        <div class="input-group-append">
+                            <button class="btn btn-outline-secondary" type="button" onclick="copyToClipboard('sha256Output')">
+                                复制结果
+                            </button>
+                        </div>
+                    </div>
                 </div>
             </div>
 
@@ -131,7 +184,14 @@
                 <button class="btn btn-primary" onclick="encryptSHA512()">加密</button>
                 <div class="form-group mt-3">
                     <label for="sha512Output">加密结果:</label>
-                    <textarea id="sha512Output" class="form-control" rows="3" readonly></textarea>
+                    <div class="input-group">
+                        <textarea id="sha512Output" class="form-control" rows="3" readonly></textarea>
+                        <div class="input-group-append">
+                            <button class="btn btn-outline-secondary" type="button" onclick="copyToClipboard('sha512Output')">
+                                复制结果
+                            </button>
+                        </div>
+                    </div>
                 </div>
             </div>
 
@@ -152,7 +212,14 @@
                 </div>
                 <div class="form-group mt-3">
                     <label for="desOutput">结果:</label>
-                    <textarea id="desOutput" class="form-control" rows="3" readonly></textarea>
+                    <div class="input-group">
+                        <textarea id="desOutput" class="form-control" rows="3" readonly></textarea>
+                        <div class="input-group-append">
+                            <button class="btn btn-outline-secondary" type="button" onclick="copyToClipboard('desOutput')">
+                                复制结果
+                            </button>
+                        </div>
+                    </div>
                 </div>
             </div>
 
@@ -173,7 +240,14 @@
                 </div>
                 <div class="form-group mt-3">
                     <label for="aesOutput">结果:</label>
-                    <textarea id="aesOutput" class="form-control" rows="3" readonly></textarea>
+                    <div class="input-group">
+                        <textarea id="aesOutput" class="form-control" rows="3" readonly></textarea>
+                        <div class="input-group-append">
+                            <button class="btn btn-outline-secondary" type="button" onclick="copyToClipboard('aesOutput')">
+                                复制结果
+                            </button>
+                        </div>
+                    </div>
                 </div>
             </div>
 
@@ -190,7 +264,14 @@
                 </div>
                 <div class="form-group mt-3">
                     <label for="base64Output">结果:</label>
-                    <textarea id="base64Output" class="form-control" rows="3" readonly></textarea>
+                    <div class="input-group">
+                        <textarea id="base64Output" class="form-control" rows="3" readonly></textarea>
+                        <div class="input-group-append">
+                            <button class="btn btn-outline-secondary" type="button" onclick="copyToClipboard('base64Output')">
+                                复制结果
+                            </button>
+                        </div>
+                    </div>
                 </div>
             </div>
 
@@ -207,11 +288,48 @@
                 </div>
                 <div class="form-group mt-3">
                     <label for="urlOutput">结果:</label>
-                    <textarea id="urlOutput" class="form-control" rows="3" readonly></textarea>
+                    <div class="input-group">
+                        <textarea id="urlOutput" class="form-control" rows="3" readonly></textarea>
+                        <div class="input-group-append">
+                            <button class="btn btn-outline-secondary" type="button" onclick="copyToClipboard('urlOutput')">
+                                复制结果
+                            </button>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
+
+    <!-- 页面底部 -->
+    <footer class="bg-light mt-5 py-4">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <h5>关于本站</h5>
+                    <p>本站提供免费的在线加密解密工具，所有运算均在本地完成，保证数据安全。</p>
+                </div>
+                <div class="col-md-4">
+                    <h5>快速导航</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#md5Tool">MD5加密</a></li>
+                        <li><a href="#sha256Tool">SHA256加密</a></li>
+                        <li><a href="#sha512Tool">SHA512加密</a></li>
+                        <li><a href="#desTool">DES加解密</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-4">
+                    <h5>联系我们</h5>
+                    <p>如有问题或建议，欢迎给我们反馈。</p>
+                    <p>Email: support@wetool.org</p>
+                </div>
+            </div>
+            <hr class="mt-4">
+            <div class="text-center">
+                <p class="mb-0">&copy; 2025 Online Crypto Tools. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
 
     <!-- 引入 Bootstrap 相关的 JS -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
@@ -219,6 +337,48 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     
     <script>
+        // 复制到剪贴板
+        function copyToClipboard(elementId) {
+            var element = document.getElementById(elementId);
+            element.select();
+            element.setSelectionRange(0, 99999); // 适用于移动设备
+            
+            try {
+                var successful = document.execCommand('copy');
+                if (successful) {
+                    showSuccess('复制成功！');
+                } else {
+                    showError(element, '复制失败，请手动复制');
+                }
+            } catch (err) {
+                showError(element, '复制失败：' + err);
+            }
+        }
+
+        // 显示成功提示
+        function showSuccess(message) {
+            // 创建提示元素
+            const tooltip = document.createElement('div');
+            tooltip.className = 'error-tooltip';
+            tooltip.style.backgroundColor = '#28a745';  // 使用成功的绿色
+            tooltip.textContent = message;
+            tooltip.id = 'successTooltip';
+            tooltip.style.top = '20px';
+            tooltip.style.left = '50%';
+            tooltip.style.transform = 'translateX(-50%)';
+
+            // 添加到页面
+            document.body.appendChild(tooltip);
+
+            // 3秒后自动移除
+            setTimeout(() => {
+                const tip = document.getElementById('successTooltip');
+                if (tip) {
+                    tip.remove();
+                }
+            }, 3000);
+        }
+
         // 显示错误提示
         function showError(element, message) {
             // 移除可能存在的旧提示
