@@ -1,32 +1,173 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MD5加密工具</title>
+    <title>在线加密解密工具</title>
     <!-- 引入Bootstrap -->
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-    <!-- 引入MD5加密库 -->
+    <!-- 引入加密库 -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.9-1/crypto-js.js"></script>
+    <style>
+        .tool-section {
+            margin-bottom: 2rem;
+            padding: 1rem;
+            border: 1px solid #dee2e6;
+            border-radius: 0.25rem;
+        }
+        .nav-tabs {
+            margin-bottom: 1rem;
+        }
+        .nav-tabs .nav-link {
+            font-size: 1.1rem;
+            padding: 1rem 2rem;
+        }
+        .tab-content {
+            padding: 1rem;
+            border: 1px solid #dee2e6;
+            border-top: none;
+            border-radius: 0 0 0.25rem 0.25rem;
+        }
+    </style>
 </head>
 <body>
     <div class="container mt-5">
-        <h1 class="text-center">在线MD5加密工具</h1>
-        <div class="form-group">
-            <label for="inputText">输入文本:</label>
-            <input type="text" id="inputText" class="form-control" placeholder="输入需要加密的文本">
-        </div>
-        <button class="btn btn-primary" onclick="encryptText()">加密</button>
-        <div class="form-group mt-3">
-            <label for="outputText">加密结果:</label>
-            <input type="text" id="outputText" class="form-control" readonly>
+        <h1 class="text-center mb-4">在线加密解密工具</h1>
+        
+        <!-- 标签页导航 -->
+        <ul class="nav nav-tabs" id="cryptoTabs" role="tablist">
+            <li class="nav-item">
+                <a class="nav-link active" id="md5-tab" data-toggle="tab" href="#md5Tool" role="tab" aria-controls="md5Tool" aria-selected="true">MD5加密</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="des-tab" data-toggle="tab" href="#desTool" role="tab" aria-controls="desTool" aria-selected="false">DES加解密</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="aes-tab" data-toggle="tab" href="#aesTool" role="tab" aria-controls="aesTool" aria-selected="false">AES加解密</a>
+            </li>
+        </ul>
+
+        <!-- 标签页内容 -->
+        <div class="tab-content" id="cryptoTabContent">
+            <!-- MD5工具 -->
+            <div class="tab-pane fade show active" id="md5Tool" role="tabpanel" aria-labelledby="md5-tab">
+                <h3>MD5加密</h3>
+                <div class="form-group">
+                    <label for="md5Input">输入文本:</label>
+                    <input type="text" id="md5Input" class="form-control" placeholder="输入需要加密的文本">
+                </div>
+                <button class="btn btn-primary" onclick="encryptMD5()">加密</button>
+                <div class="form-group mt-3">
+                    <label for="md5Output">加密结果:</label>
+                    <input type="text" id="md5Output" class="form-control" readonly>
+                </div>
+            </div>
+
+            <!-- DES工具 -->
+            <div class="tab-pane fade" id="desTool" role="tabpanel" aria-labelledby="des-tab">
+                <h3>DES加解密</h3>
+                <div class="form-group">
+                    <label for="desInput">输入文本:</label>
+                    <textarea id="desInput" class="form-control" rows="3" placeholder="输入需要加密/解密的文本"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="desKey">密钥:</label>
+                    <input type="text" id="desKey" class="form-control" placeholder="输入8位字符的密钥">
+                </div>
+                <div class="btn-group">
+                    <button class="btn btn-primary mr-2" onclick="encryptDES()">加密</button>
+                    <button class="btn btn-secondary" onclick="decryptDES()">解密</button>
+                </div>
+                <div class="form-group mt-3">
+                    <label for="desOutput">结果:</label>
+                    <textarea id="desOutput" class="form-control" rows="3" readonly></textarea>
+                </div>
+            </div>
+
+            <!-- AES工具 -->
+            <div class="tab-pane fade" id="aesTool" role="tabpanel" aria-labelledby="aes-tab">
+                <h3>AES加解密</h3>
+                <div class="form-group">
+                    <label for="aesInput">输入文本:</label>
+                    <textarea id="aesInput" class="form-control" rows="3" placeholder="输入需要加密/解密的文本"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="aesKey">密钥:</label>
+                    <input type="text" id="aesKey" class="form-control" placeholder="输入16/24/32位字符的密钥">
+                </div>
+                <div class="btn-group">
+                    <button class="btn btn-primary mr-2" onclick="encryptAES()">加密</button>
+                    <button class="btn btn-secondary" onclick="decryptAES()">解密</button>
+                </div>
+                <div class="form-group mt-3">
+                    <label for="aesOutput">结果:</label>
+                    <textarea id="aesOutput" class="form-control" rows="3" readonly></textarea>
+                </div>
+            </div>
         </div>
     </div>
+
+    <!-- 引入 Bootstrap 相关的 JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    
     <script>
-        function encryptText() {
-            var input = document.getElementById('inputText').value;
+        // MD5加密
+        function encryptMD5() {
+            var input = document.getElementById('md5Input').value;
             var encrypted = CryptoJS.MD5(input);
-            document.getElementById('outputText').value = encrypted;
+            document.getElementById('md5Output').value = encrypted;
+        }
+
+        // DES加密
+        function encryptDES() {
+            var input = document.getElementById('desInput').value;
+            var key = document.getElementById('desKey').value;
+            try {
+                var encrypted = CryptoJS.DES.encrypt(input, key).toString();
+                document.getElementById('desOutput').value = encrypted;
+            } catch (e) {
+                alert('加密失败：' + e.message);
+            }
+        }
+
+        // DES解密
+        function decryptDES() {
+            var input = document.getElementById('desInput').value;
+            var key = document.getElementById('desKey').value;
+            try {
+                var decrypted = CryptoJS.DES.decrypt(input, key);
+                var result = decrypted.toString(CryptoJS.enc.Utf8);
+                document.getElementById('desOutput').value = result;
+            } catch (e) {
+                alert('解密失败：' + e.message);
+            }
+        }
+
+        // AES加密
+        function encryptAES() {
+            var input = document.getElementById('aesInput').value;
+            var key = document.getElementById('aesKey').value;
+            try {
+                var encrypted = CryptoJS.AES.encrypt(input, key).toString();
+                document.getElementById('aesOutput').value = encrypted;
+            } catch (e) {
+                alert('加密失败：' + e.message);
+            }
+        }
+
+        // AES解密
+        function decryptAES() {
+            var input = document.getElementById('aesInput').value;
+            var key = document.getElementById('aesKey').value;
+            try {
+                var decrypted = CryptoJS.AES.decrypt(input, key);
+                var result = decrypted.toString(CryptoJS.enc.Utf8);
+                document.getElementById('aesOutput').value = result;
+            } catch (e) {
+                alert('解密失败：' + e.message);
+            }
         }
     </script>
 </body>
