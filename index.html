@@ -81,6 +81,9 @@
             <li class="nav-item">
                 <a class="nav-link" id="base64-tab" data-toggle="tab" href="#base64Tool" role="tab" aria-controls="base64Tool" aria-selected="false">Base64编码</a>
             </li>
+            <li class="nav-item">
+                <a class="nav-link" id="url-tab" data-toggle="tab" href="#urlTool" role="tab" aria-controls="urlTool" aria-selected="false">URL编码</a>
+            </li>
         </ul>
 
         <!-- 标签页内容 -->
@@ -155,6 +158,23 @@
                 <div class="form-group mt-3">
                     <label for="base64Output">结果:</label>
                     <textarea id="base64Output" class="form-control" rows="3" readonly></textarea>
+                </div>
+            </div>
+
+            <!-- URL编码工具 -->
+            <div class="tab-pane fade" id="urlTool" role="tabpanel" aria-labelledby="url-tab">
+                <h3>URL编码/解码</h3>
+                <div class="form-group">
+                    <label for="urlInput">输入文本:</label>
+                    <textarea id="urlInput" class="form-control" rows="3" placeholder="输入需要编码/解码的文本"></textarea>
+                </div>
+                <div class="btn-group">
+                    <button class="btn btn-primary mr-2" onclick="encodeURL()">编码</button>
+                    <button class="btn btn-secondary" onclick="decodeURL()">解码</button>
+                </div>
+                <div class="form-group mt-3">
+                    <label for="urlOutput">结果:</label>
+                    <textarea id="urlOutput" class="form-control" rows="3" readonly></textarea>
                 </div>
             </div>
         </div>
@@ -273,6 +293,28 @@
             try {
                 var decoded = decodeURIComponent(escape(atob(input.value)));
                 document.getElementById('base64Output').value = decoded;
+            } catch (e) {
+                showError(input, '解码失败：' + e.message);
+            }
+        }
+
+        // URL编码
+        function encodeURL() {
+            var input = document.getElementById('urlInput');
+            try {
+                var encoded = encodeURIComponent(input.value);
+                document.getElementById('urlOutput').value = encoded;
+            } catch (e) {
+                showError(input, '编码失败：' + e.message);
+            }
+        }
+
+        // URL解码
+        function decodeURL() {
+            var input = document.getElementById('urlInput');
+            try {
+                var decoded = decodeURIComponent(input.value);
+                document.getElementById('urlOutput').value = decoded;
             } catch (e) {
                 showError(input, '解码失败：' + e.message);
             }
