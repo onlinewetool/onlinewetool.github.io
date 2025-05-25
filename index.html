@@ -54,6 +54,8 @@
     
     <!-- 引入Bootstrap -->
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <!-- 引入 Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
     <!-- 引入加密库 -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.9-1/crypto-js.js"></script>
     <style>
@@ -111,27 +113,56 @@
         }
     </style>
 </head>
-<body>
-    <div class="container mt-5">
-        <div class="jumbotron">
-            <h1 class="text-center">在线加密解密工具</h1>
-            <p class="lead text-center mt-3">
-                免费、安全、便捷的在线加密解密工具箱，支持多种加密算法。所有运算都在您的浏览器中完成，不会将数据传输到服务器。
-            </p>
+<body>    <div class="container mt-5">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h1>在线加密解密工具</h1>
+            <button class="btn btn-info" type="button" data-toggle="collapse" data-target="#helpContent" aria-expanded="false" aria-controls="helpContent">
+                <i class="fas fa-question-circle"></i> 查看使用说明
+            </button>
         </div>
 
-        <!-- 工具说明 -->
-        <div class="alert alert-info mb-4" role="alert">
-            <h4 class="alert-heading mb-3">使用说明</h4>
-            <p>选择您需要的加密/解密方式，输入文本后点击相应按钮即可。每个工具的具体说明如下：</p>
-            <ul class="mb-0">
-                <li><strong>MD5：</strong>不可逆的哈希算法，常用于密码存储、文件校验</li>
-                <li><strong>SHA256/SHA512：</strong>安全性更高的哈希算法，输出长度分别为64位和128位</li>
-                <li><strong>DES：</strong>对称加密算法，需要8位字符密钥</li>
-                <li><strong>AES：</strong>高级加密标准，支持16/24/32位字符密钥</li>
-                <li><strong>Base64：</strong>基础的编码方式，用于传输二进制数据</li>
-                <li><strong>URL：</strong>网址编码，用于处理URL中的特殊字符</li>
-            </ul>
+        <!-- 可折叠的说明内容 -->
+        <div class="collapse mb-4" id="helpContent">
+            <div class="card card-body">
+                <h4 class="card-title">关于本工具</h4>
+                <p class="lead">免费、安全、便捷的在线加密解密工具箱，支持多种加密算法。所有运算都在您的浏览器中完成，不会将数据传输到服务器。</p>
+                
+                <h5 class="mt-4">工具说明：</h5>
+                <div class="row">
+                    <div class="col-md-6">
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item">
+                                <h6 class="mb-1">MD5</h6>
+                                <small class="text-muted">不可逆的哈希算法，常用于密码存储、文件校验</small>
+                            </li>
+                            <li class="list-group-item">
+                                <h6 class="mb-1">SHA256/SHA512</h6>
+                                <small class="text-muted">安全性更高的哈希算法，输出长度分别为64位和128位</small>
+                            </li>
+                            <li class="list-group-item">
+                                <h6 class="mb-1">DES</h6>
+                                <small class="text-muted">对称加密算法，需要8位字符密钥</small>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="col-md-6">
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item">
+                                <h6 class="mb-1">AES</h6>
+                                <small class="text-muted">高级加密标准，支持16/24/32位字符密钥</small>
+                            </li>
+                            <li class="list-group-item">
+                                <h6 class="mb-1">Base64</h6>
+                                <small class="text-muted">基础的编码方式，用于传输二进制数据</small>
+                            </li>
+                            <li class="list-group-item">
+                                <h6 class="mb-1">URL</h6>
+                                <small class="text-muted">网址编码，用于处理URL中的特殊字符</small>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
         </div>
         
         <!-- 标签页导航 -->
@@ -350,7 +381,7 @@
                 <div class="col-md-4">
                     <h5>联系我们</h5>
                     <p>如有问题或建议，欢迎给我们反馈。</p>
-                    <p>Email: support@wetool.org</p>
+                    <p>Email: gary.zhu1991@qq.com</p>
                 </div>
             </div>
             <hr class="mt-4">
