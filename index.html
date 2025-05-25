@@ -27,6 +27,39 @@
             border: 1px solid #dee2e6;
             border-top: none;
             border-radius: 0 0 0.25rem 0.25rem;
+        }        .error-tooltip {
+            position: fixed;
+            background-color: #dc3545;
+            color: white;
+            padding: 0.75rem 1.25rem;
+            border-radius: 0.25rem;
+            font-size: 1rem;
+            z-index: 1000;
+            max-width: 80%;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            animation: slideInOut 3s ease-in-out forwards;
+            left: 50%;
+            transform: translateX(-50%);
+            top: 20px;
+            text-align: center;
+        }
+        @keyframes slideInOut {
+            0% { 
+                opacity: 0;
+                transform: translate(-50%, -100%);
+            }
+            15% { 
+                opacity: 1;
+                transform: translate(-50%, 0);
+            }
+            85% { 
+                opacity: 1;
+                transform: translate(-50%, 0);
+            }
+            100% { 
+                opacity: 0;
+                transform: translate(-50%, -100%);
+            }
         }
     </style>
 </head>
@@ -133,84 +166,115 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     
     <script>
+        // 显示错误提示
+        function showError(element, message) {
+            // 移除可能存在的旧提示
+            removeError();
+
+            // 创建提示元素
+            const tooltip = document.createElement('div');
+            tooltip.className = 'error-tooltip';
+            tooltip.textContent = message;
+            tooltip.id = 'errorTooltip';            // 设置在页面顶部中间
+            tooltip.style.top = '20px';
+            tooltip.style.left = '50%';
+            tooltip.style.transform = 'translateX(-50%)';
+
+            // 添加到页面
+            document.body.appendChild(tooltip);
+
+            // 3秒后自动移除
+            setTimeout(removeError, 3000);
+        }
+
+        // 移除错误提示
+        function removeError() {
+            const tooltip = document.getElementById('errorTooltip');
+            if (tooltip) {
+                tooltip.remove();
+            }
+        }
+
         // MD5加密
         function encryptMD5() {
-            var input = document.getElementById('md5Input').value;
-            var encrypted = CryptoJS.MD5(input);
-            document.getElementById('md5Output').value = encrypted;
+            var input = document.getElementById('md5Input');
+            try {
+                var encrypted = CryptoJS.MD5(input.value);
+                document.getElementById('md5Output').value = encrypted;
+            } catch (e) {
+                showError(input, '加密失败：' + e.message);
+            }
         }
 
         // DES加密
         function encryptDES() {
-            var input = document.getElementById('desInput').value;
-            var key = document.getElementById('desKey').value;
+            var input = document.getElementById('desInput');
+            var key = document.getElementById('desKey');
             try {
-                var encrypted = CryptoJS.DES.encrypt(input, key).toString();
+                var encrypted = CryptoJS.DES.encrypt(input.value, key.value).toString();
                 document.getElementById('desOutput').value = encrypted;
             } catch (e) {
-                alert('加密失败：' + e.message);
+                showError(key, '加密失败：' + e.message);
             }
         }
 
         // DES解密
         function decryptDES() {
-            var input = document.getElementById('desInput').value;
-            var key = document.getElementById('desKey').value;
+            var input = document.getElementById('desInput');
+            var key = document.getElementById('desKey');
             try {
-                var decrypted = CryptoJS.DES.decrypt(input, key);
+                var decrypted = CryptoJS.DES.decrypt(input.value, key.value);
                 var result = decrypted.toString(CryptoJS.enc.Utf8);
                 document.getElementById('desOutput').value = result;
             } catch (e) {
-                alert('解密失败：' + e.message);
+                showError(key, '解密失败：' + e.message);
             }
         }
 
         // AES加密
         function encryptAES() {
-            var input = document.getElementById('aesInput').value;
-            var key = document.getElementById('aesKey').value;
+            var input = document.getElementById('aesInput');
+            var key = document.getElementById('aesKey');
             try {
-                var encrypted = CryptoJS.AES.encrypt(input, key).toString();
+                var encrypted = CryptoJS.AES.encrypt(input.value, key.value).toString();
                 document.getElementById('aesOutput').value = encrypted;
             } catch (e) {
-                alert('加密失败：' + e.message);
+                showError(key, '加密失败：' + e.message);
             }
         }
 
         // AES解密
         function decryptAES() {
-            var input = document.getElementById('aesInput').value;
-            var key = document.getElementById('aesKey').value;
+            var input = document.getElementById('aesInput');
+            var key = document.getElementById('aesKey');
             try {
-                var decrypted = CryptoJS.AES.decrypt(input, key);
+                var decrypted = CryptoJS.AES.decrypt(input.value, key.value);
                 var result = decrypted.toString(CryptoJS.enc.Utf8);
                 document.getElementById('aesOutput').value = result;
             } catch (e) {
-                alert('解密失败：' + e.message);
+                showError(key, '解密失败：' + e.message);
             }
         }
 
         // Base64编码
         function encodeBase64() {
-            var input = document.getElementById('base64Input').value;
+            var input = document.getElementById('base64Input');
             try {
-                // 使用 btoa 进行 Base64 编码
-                var encoded = btoa(unescape(encodeURIComponent(input)));
+                var encoded = btoa(unescape(encodeURIComponent(input.value)));
                 document.getElementById('base64Output').value = encoded;
             } catch (e) {
-                alert('编码失败：' + e.message);
+                showError(input, '编码失败：' + e.message);
             }
         }
 
         // Base64解码
         function decodeBase64() {
-            var input = document.getElementById('base64Input').value;
+            var input = document.getElementById('base64Input');
             try {
-                // 使用 atob 进行 Base64 解码
-                var decoded = decodeURIComponent(escape(atob(input)));
+                var decoded = decodeURIComponent(escape(atob(input.value)));
                 document.getElementById('base64Output').value = decoded;
             } catch (e) {
-                alert('解码失败：' + e.message);
+                showError(input, '解码失败：' + e.message);
             }
         }
     </script>
