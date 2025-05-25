@@ -73,6 +73,12 @@
                 <a class="nav-link active" id="md5-tab" data-toggle="tab" href="#md5Tool" role="tab" aria-controls="md5Tool" aria-selected="true">MD5加密</a>
             </li>
             <li class="nav-item">
+                <a class="nav-link" id="sha256-tab" data-toggle="tab" href="#sha256Tool" role="tab" aria-controls="sha256Tool" aria-selected="false">SHA256</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="sha512-tab" data-toggle="tab" href="#sha512Tool" role="tab" aria-controls="sha512Tool" aria-selected="false">SHA512</a>
+            </li>
+            <li class="nav-item">
                 <a class="nav-link" id="des-tab" data-toggle="tab" href="#desTool" role="tab" aria-controls="desTool" aria-selected="false">DES加解密</a>
             </li>
             <li class="nav-item">
@@ -99,6 +105,33 @@
                 <div class="form-group mt-3">
                     <label for="md5Output">加密结果:</label>
                     <input type="text" id="md5Output" class="form-control" readonly>
+                </div>
+            </div>
+
+            <!-- SHA256工具 -->
+            <div class="tab-pane fade" id="sha256Tool" role="tabpanel" aria-labelledby="sha256-tab">
+                <h3>SHA256加密</h3>
+                <div class="form-group">
+                    <label for="sha256Input">输入文本:</label>
+                    <textarea id="sha256Input" class="form-control" rows="3" placeholder="输入需要加密的文本"></textarea>
+                </div>
+                <button class="btn btn-primary" onclick="encryptSHA256()">加密</button>
+                <div class="form-group mt-3">                    <label for="sha256Output">加密结果:</label>
+                    <textarea id="sha256Output" class="form-control" rows="3" readonly></textarea>
+                </div>
+            </div>
+
+            <!-- SHA512工具 -->
+            <div class="tab-pane fade" id="sha512Tool" role="tabpanel" aria-labelledby="sha512-tab">
+                <h3>SHA512加密</h3>
+                <div class="form-group">
+                    <label for="sha512Input">输入文本:</label>
+                    <textarea id="sha512Input" class="form-control" rows="3" placeholder="输入需要加密的文本"></textarea>
+                </div>
+                <button class="btn btn-primary" onclick="encryptSHA512()">加密</button>
+                <div class="form-group mt-3">
+                    <label for="sha512Output">加密结果:</label>
+                    <textarea id="sha512Output" class="form-control" rows="3" readonly></textarea>
                 </div>
             </div>
 
@@ -221,6 +254,28 @@
             try {
                 var encrypted = CryptoJS.MD5(input.value);
                 document.getElementById('md5Output').value = encrypted;
+            } catch (e) {
+                showError(input, '加密失败：' + e.message);
+            }
+        }
+
+        // SHA256加密
+        function encryptSHA256() {
+            var input = document.getElementById('sha256Input');
+            try {
+                var encrypted = CryptoJS.SHA256(input.value);
+                document.getElementById('sha256Output').value = encrypted;
+            } catch (e) {
+                showError(input, '加密失败：' + e.message);
+            }
+        }
+
+        // SHA512加密
+        function encryptSHA512() {
+            var input = document.getElementById('sha512Input');
+            try {
+                var encrypted = CryptoJS.SHA512(input.value);
+                document.getElementById('sha512Output').value = encrypted;
             } catch (e) {
                 showError(input, '加密失败：' + e.message);
             }
