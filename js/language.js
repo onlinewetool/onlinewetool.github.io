@@ -3,6 +3,9 @@ function getUserLanguage() {
     const savedLang = localStorage.getItem('preferred-language');
     if (savedLang) return savedLang;
     
+    if(window.location.href.includes('lang=en')) {
+        return 'en';
+    }
     const browserLang = navigator.language || navigator.userLanguage;
     return browserLang.startsWith('zh') ? 'zh-CN' : 'en';
 }
